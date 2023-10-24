@@ -1,0 +1,48 @@
+{:deps {io.github.matheusfrancisco/berry {:local/root "."}}
+ :paths ["."]
+
+ :bbin/bin {berry {:ns-default berry.api}}
+
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [quickblog.cli :as cli])
+  :init (do
+          (def opts {:blog-title "Blog Engine"
+                     :blog-description "A blog engine"
+                     :about-link ""
+                     :twitter-handle "berryblog"})
+          (defn- run-command [cmd-name opts]
+            (apply cli/dispatch opts cmd-name *command-line-args*)))
+
+  berry {:doc "Start blogging  Run `bb quickblog help` for details."
+             :task (cli/dispatch opts)}
+
+  new {:doc "Create new blog article"
+       :task (run-command "new" opts)}
+
+  migrate {:doc "Migrate away from posts.edn to metadata in post files"
+           :task (run-command "migrate" opts)}
+
+  refresh-templates
+  {:doc "Update to latest templates. NOTE: this is a destructive operation, as it will overwrite any templates you have in your `:templates-dir`. You should ensure that your templates are backed up or under revision control before running this command!"
+   :task (run-command "refresh-templates" opts)}
+
+  render {:doc "Render blog"
+          :task (run-command "render" opts)}
+
+  watch  {:doc "Watch posts and templates and render file changes"
+          :task (run-command "watch" opts)}
+
+  clean {:doc "Remove cache and output directories"
+         :task (run-command "clean" opts)}
+
+  publish {:doc "Publish blog"
+           :depends [render]
+           :task (shell "rsync -a --delete public/ user@yourdomain:~/blog")}
+
+  test {:doc "Run tests"
+        :task (apply clojure "-M:test" *command-line-args*)}
+
+  quickdoc {:doc "Re-generate API.md"
+            :task (shell "bb --config quickdoc.edn quickdoc")}
+  }}
