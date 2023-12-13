@@ -1,5 +1,5 @@
 ## Berry
-is 
+is simple blog engine made in clojure, using helix 
 
 ## Commands
 ## Watch Dev/Tests
