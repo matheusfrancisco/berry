@@ -38,3 +38,6 @@ resources/front/public/mockServiceWorker.js
 /src/gen
 
 .DS_Store
+
+public/js
+public/css
