@@ -1,45 +1,72 @@
-/***
-  Dummy css delete this and adds your custom css / scss
-***/
-
-/* Reapply the pointer cursor for anchor tags */
-a, button {
-    cursor: revert;
+body {
+  /* borrowed from metaredux.com */
+  font: 400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  margin: 0;
+  padding: 0;
+  color: rgb(51, 65, 85)
 }
 
-/* Remove list styles (bullets/numbers) */
-ol, ul, menu {
-    list-style: none;
+h1, h2, h3 {
+  font-weight: 800;
 }
 
-/* For images to not be able to exceed their container */
-img {
-    max-inline-size: 100%;
-    max-block-size: 100%;
+a {
+  color: rgb(51, 65, 85)
 }
 
-/* removes spacing between cells in tables */
-table {
-    border-collapse: collapse;
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto 0 auto;
+  padding: 0 15px;
 }
 
-/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
-input, textarea {
-    -webkit-user-select: auto;
+h2 {
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
-/* revert the 'white-space' property for textarea elements on Safari */
-textarea {
-    white-space: revert;
+p {
+  margin-top: 0.2em;
 }
 
-/* minimum style to allow to style meter element */
-meter {
-    -webkit-appearance: revert;
-    appearance: revert;
+.site-header {
+  border-top: 2px solid #424242;
+  border-bottom: 1px solid #e8e8e8;
+  min-height: 55.95px;
+  position: relative;
 }
 
-/* preformatted text - use only for this feature */
-pre {
-    all: revert;
+.site-title {
+  margin: 0;
+}
+
+.site-nav {
+  float: right;
+  line-height: 4rem;
+}
+
+.site-nav .page-link:not(:last-child) {
+  margin-right: 20px;
+}
+
+.page-link {
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.page-icon {
+  vertical-align: middle;
+}
+
+ul.index {
+  list-style: none;
+  padding-left: 0;
+}
+
+.index li {
+  margin-bottom: 1em;
+}
+
+code {
+  white-space: pre;
 }
