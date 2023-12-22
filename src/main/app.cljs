@@ -4,12 +4,29 @@
    [helix.core :refer [$]]
    [helix.dom :as d]
    [helix.hooks :as hooks]
+   [main.api :refer [meu-print]]
    [main.lib :refer [defnc]]))
+
+(defn replace-str [^String s]
+  (.replace s "_" "-"))
+
+(defn convert-keys [obj]
+  (reduce-kv (fn [m k v]
+               (assoc m (-> k
+                            (name)
+                            (replace-str)
+                            keyword) v))
+             {}
+             obj))
+
+(defn js->cljs-key [obj]
+  (js->clj obj :keywordize-keys true))
 
 (defnc app []
   (let [[_state _set-state] (hooks/use-state {})
         posts-list [{:title "Test" :date "2023-12-13"
                      :body "testestestestestesteststes"}]]
+    (meu-print (clj->js {:a"test"}))
     (d/body
      (d/div {:class-name "site-header"}
             (d/body {:class-name "wrapper"}

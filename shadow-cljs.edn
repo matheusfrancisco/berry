@@ -1,5 +1,7 @@
 {:source-paths ["src" "test"]
- :dependencies [[lilactown/helix "0.1.9"]]
+ :dependencies [[lilactown/helix "0.1.9"]
+                [lambdaisland/fetch  "1.1.60"]
+                [funcool/promesa "9.0.494"]]
  :builds {:app {:target           :browser
                 :devtools         {:http-port 8000
                                    :http-root "public"
