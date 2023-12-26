@@ -1,0 +1,36 @@
+{:paths ["src/main" "src/css" "src" "bb" "src/gen" "src/js" "resources"]
+ :deps {org.clojure/clojure       {:mvn/version "1.11.1"}
+        org.clojure/clojurescript {:mvn/version "1.11.60"}
+        lilactown/helix           {:mvn/version "0.1.9"}
+        funcool/promesa           {:mvn/version "9.0.494"}
+        lambdaisland/fetch        {:mvn/version "1.1.60"}
+        markdown-clj/markdown-clj {:mvn/version "1.11.7"}}
+
+ :aliases
+ {;; frontend
+  :front {:extra-paths ["test/front"]
+          :extra-deps {cider/cider-nrepl {:mvn/version "0.28.6"}
+                       thheller/shadow-cljs {:mvn/version "2.20.10"}}}
+
+  :clojure-lsp {:replace-deps {com.github.clojure-lsp/clojure-lsp-standalone {:mvn/version "2022.09.01-15.27.31"}}
+                :main-opts ["-m" "clojure-lsp.main"]}
+
+  ;; clj -X:run
+  :run {:main-opts ["-m" "main.core"]
+        :exec-fn main.core/-main}
+
+  ;; clj -M:test
+  :test {:extra-paths ["test/back"]
+         :extra-deps  {org.clojars.bigsy/pg-embedded-clj {:mvn/version "1.0.0"}
+                       lambdaisland/kaocha {:mvn/version "1.70.1086"}
+                       lambdaisland/kaocha-cloverage {:mvn/version "1.0.75"}
+                       nubank/matcher-combinators {:mvn/version "3.5.1"}
+                       nubank/state-flow {:mvn/version "5.14.2"}}
+         :main-opts   ["-m" "kaocha.runner"]}
+
+  ;; clj -M:nrepl
+  :nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "0.30.0"}}
+          :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
+
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.4"}}
+          :ns-default build}}}

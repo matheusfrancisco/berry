@@ -19,23 +19,45 @@ jobs:
       uses: actions/checkout@v3.0.2
 
     - name: Prepare java
-      uses: actions/setup-java@v3.3.0
+      uses: actions/setup-java@v3
       with:
-        distribution: 'adopt'
+        distribution: 'zulu'
         java-version: '11'
 
-    - name: Install clojure cli
-      uses: DeLaGuardo/setup-clojure@master
+    - name: Install clojure tools
+      uses: DeLaGuardo/setup-clojure@10.1
       with:
-        cli: 1.11.1.1113
+          # Install just one or all simultaneously
+          # The value must indicate a particular version of the tool, or use 'latest'
+          # to always provision the latest version
+        boot: 2.8.3                  # Boot.clj
+        bb: latest
+
+      # Optional step:
+    - name: Cache clojure dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.m2/repository
+          ~/.gitlibs
+          ~/.deps.clj
+        # List all files containing dependencies:
+        key: cljdeps-${{ hashFiles('deps.edn') }}
+        # key: cljdeps-${{ hashFiles('deps.edn', 'bb.edn') }}
+        # key: cljdeps-${{ hashFiles('project.clj') }}
+        # key: cljdeps-${{ hashFiles('build.boot') }}
+        restore-keys: cljdeps-
 
     - name: Build ${{ matrix.node-version }}
       uses: actions/setup-node@v3.2.0
       with:
         node-version: ${{ matrix.node-version }}
+
     - run: |
         npm install
         npm run release
+
+    - run: bb build-posts
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3

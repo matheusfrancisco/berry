@@ -1,12 +1,19 @@
-{:source-paths ["src" "test"]
- :dependencies [[lilactown/helix "0.1.9"]]
+{:deps {:aliases [:front]}
  :builds {:app {:target           :browser
+                :asset-path       "public/js"
+                :output-dir       "public/js"
                 :devtools         {:http-port 8000
                                    :http-root "public"
                                    :preloads [dev.refresh]
                                    :reload-strategy :full}
+                ;;https://github.com/thheller/shadow-cljs/issues/854
+                :js-options       {:babel-preset-config {:targets {:chrome 80}}}
                 :modules          {:main {:init-fn main.app/init}}
-                :compiler-options {:install-deps true}}
+
+                :compiler-options {:closure-warnings   {:global-this :off}
+                                   :infer-externs      :auto
+                                   :output-feature-set :es-next
+                                   :external-config {:devtools/config {:features-to-install [:formatters :hints]}}}}
 
           :tests {:target    :browser-test
                   :test-dir  "target/test"
