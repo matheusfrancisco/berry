@@ -48,6 +48,8 @@ jobs:
         # key: cljdeps-${{ hashFiles('build.boot') }}
         restore-keys: cljdeps-
 
+    - run: bb build-posts
+
     - name: Build ${{ matrix.node-version }}
       uses: actions/setup-node@v3.2.0
       with:
@@ -56,8 +58,6 @@ jobs:
     - run: |
         npm install
         npm run release
-
-    - run: bb build-posts
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
