@@ -137,7 +137,7 @@
      (helix.core/provider
       {:context task-context
        :value posts}
-      ($ rrd/BrowserRouter
+      ($ rrd/HashRouter {:basename "/"}
          ($ nav)
          ($ rrd/Routes
             ($ rrd/Route {:path "/" :element ($ home)})
