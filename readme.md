@@ -13,6 +13,9 @@ you should write your posts inside /posts/ using markdown format
 
 
 ## TODO
+in this repo may have some setup how to use tsx in he clojurescript building the components, how
+to invoke clj or cljs using cljc. Everything will be used soon to make those todo happen
+
 - [ ] make an engine
 - [ ] make the post engine more easy to use
 - [ ] deploy to clojars as .jar
