@@ -1,5 +1,5 @@
 ## Berry
-is an opinated blog build in cljs, clj and Berry
+is an opinated blog build in cljs(helix), clj, babashka
 
 Soon this will be a custom blog engine
 
@@ -20,7 +20,6 @@ to invoke clj or cljs using cljc. Everything will be used soon to make those tod
 - [ ] make the post engine more easy to use
 - [ ] deploy to clojars as .jar
 - [ ] dpeloy to npm to using with npm
-
 
 ## Watch Dev/Tests
 
