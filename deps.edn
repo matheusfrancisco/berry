@@ -1,9 +1,10 @@
-{:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.11.1"}
-
-        lilactown/helix {:mvn/version "0.1.9"}
-        funcool/promesa {:mvn/version "9.0.494"}
-        lambdaisland/fetch {:mvn/version "1.1.60"}}
+{:paths ["src/main" "src/css" "src" "bb" "src/gen" "src/js" "resources"]
+ :deps {org.clojure/clojure       {:mvn/version "1.11.1"}
+        org.clojure/clojurescript {:mvn/version "1.11.60"}
+        lilactown/helix           {:mvn/version "0.1.9"}
+        funcool/promesa           {:mvn/version "9.0.494"}
+        lambdaisland/fetch        {:mvn/version "1.1.60"}
+        markdown-clj/markdown-clj {:mvn/version "1.11.7"}}
 
  :aliases
  {;; frontend

@@ -41,6 +41,8 @@ p {
 }
 
 .site-nav {
+  display: flex;
+
   float: right;
   line-height: 4rem;
 }
@@ -50,6 +52,7 @@ p {
 }
 
 .page-link {
+  margin-right: 12px;
   text-decoration: none;
   vertical-align: middle;
 }
