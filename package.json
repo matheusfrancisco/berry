@@ -5,7 +5,7 @@
   "scripts": {
     "css:release": "sass --load-path=node_modules src/css/base.scss:public/css/base.min.css --style=compressed",
     "js:release": "shadow-cljs release app",
-    "release": "run-s *:release",
+    "release": "npm run css:release && npm run components && npm run postcss:release && npm run js:release",
     "postcss:build": "npx cross-env TAILWIND_MODE=build postcss src/css/global.css -o ./public/css/output.css --verbose",
     "postcss:watch": "npx cross-env TAILWIND_MODE=watch postcss src/css/global.css -o ./public/css/output.css --verbose -w",
     "postcss:release": "npx cross-env NODE_ENV=production postcss src/css/global.css -o ./public/css/output.css --verbose",
