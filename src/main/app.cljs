@@ -102,7 +102,7 @@
 
     (hooks/use-effect
       :once
-      (-> (js/fetch "/posts/posts.edn")
+      (-> (js/fetch "./posts/posts.edn")
           (.then (fn [r] (.text r)))
           (.then (fn [r] (reader/read-string r)))
           (.then (fn [r]
