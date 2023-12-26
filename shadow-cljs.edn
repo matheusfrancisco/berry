@@ -1,4 +1,5 @@
 {:deps {:aliases [:front]}
+ :build-defaults {:closure-defines {main.app/BASE_URL "http://localhost:8000"}}
  :builds {:app {:target           :browser
                 :asset-path       "public/js"
                 :output-dir       "public/js"
@@ -8,8 +9,9 @@
                                    :reload-strategy :full}
                 ;;https://github.com/thheller/shadow-cljs/issues/854
                 :js-options       {:babel-preset-config {:targets {:chrome 80}}}
-                :modules          {:main {:init-fn main.app/init}}
-
+                :dev {:modules {:main {:init-fn main.app/init}}}
+                :release {:modules {:main {:init-fn main.app/init}}
+                          :closure-defines {main.app/BASE_URL "https://matheusfrancisco.com.br/berry"}}
                 :compiler-options {:closure-warnings   {:global-this :off}
                                    :infer-externs      :auto
                                    :output-feature-set :es-next

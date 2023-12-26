@@ -96,13 +96,20 @@
               (d/div "...")
               (d/p (d/i "Published: " (d/span {:class-name "post-date"} date))))))))
 
+(goog-define BASE_URL "")
+(when-not (every? not-empty [BASE_URL])
+  (throw (js/Error. "BASE_URL should be defined")))
+
 (defnc app []
   (let [[infos set-infos] (hooks/use-state [])
         [posts dispatch] (hooks/use-reducer posts-reducer initial-posts)]
 
     (hooks/use-effect
       :once
-      (-> (js/fetch "/posts/posts.edn")
+      (-> (js/fetch (str BASE_URL "/posts/posts.edn"))
+          (.catch (fn [e]
+                    (prn e)
+                    (set-infos concat [])))
           (.then (fn [r] (.text r)))
           (.then (fn [r] (reader/read-string r)))
           (.then (fn [r]
