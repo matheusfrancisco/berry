@@ -107,13 +107,14 @@
     (hooks/use-effect
       :once
       (-> (js/fetch (str BASE_URL "/posts/posts.edn"))
-          (.catch (fn [e]
-                    (prn e)
-                    (set-infos concat [])))
+
           (.then (fn [r] (.text r)))
           (.then (fn [r] (reader/read-string r)))
           (.then (fn [r]
-                   (set-infos concat r)))))
+                   (set-infos concat r)))
+          (.catch (fn [e]
+                    (prn e)
+                    (set-infos concat [])))))
 
     (hooks/use-effect
       [infos]
